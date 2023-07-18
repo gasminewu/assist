@@ -1,0 +1,129 @@
+server:
+  port: 6080
+  servlet:
+    context-path: /assi
+spring:
+  application:
+    # 模块名称
+    # @type string
+    name: assi
+  profiles: 
+    include: params
+  servlet: 
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  datasource:
+#  非分布式事务
+    type: com.alibaba.druid.pool.DruidDataSource
+#  分布式事务
+#    type: com.alibaba.druid.pool.xa.DruidXADataSource
+    druid:
+        # 数据源1
+        url: jdbc:mysql://127.0.0.1:3306/assi?useSSL=false&characterEncoding=utf-8
+        username: root
+        password: wisoft123
+        driverClassName: com.mysql.jdbc.Driver
+        # 初始连接数
+        initialSize: 5
+        # 最小连接池数量
+        minIdle: 10
+        # 最大连接池数量
+        maxActive: 20
+        # 配置获取连接等待超时的时间
+        maxWait: 60000
+        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+        timeBetweenEvictionRunsMillis: 60000
+        # 配置一个连接在池中最小生存的时间，单位是毫秒
+        minEvictableIdleTimeMillis: 300000
+        # 配置一个连接在池中最大生存的时间，单位是毫秒
+        maxEvictableIdleTimeMillis: 900000
+        # 配置检测连接是否有效
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+         # 合并多个DruidDataSource的监控数据
+        useGlobalDataSourceStat: true
+        filter:
+            stat:
+                enabled: true
+                # 慢SQL记录
+                log-slow-sql: true
+                slow-sql-millis: 1000
+                merge-sql: true
+            wall:
+                config:
+                    multi-statement-allow: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: com.wisoft.hamigua.common.jpa.UpperCaseSpringPhysicalNamingStrategy
+    properties:
+      hibernate:
+        auto_quote_keyword: globally_quoted_identifiers
+#      naming:
+#        physical-strategy:  org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  redis:
+    host: 192.10.110.59
+    port: 6379
+    database: 13
+    lettuce:
+      pool:
+        max-idle: 5
+        max-active: 10
+        max-wait: 2000
+        min-idle: 1
+logging: 
+  file: 
+    path: ./logs/assi
+  level:
+    root: INFO
+#    屏蔽转word warn级别日志
+    org.apache.poi.util.XMLHelper: error
+# Swagger配置
+swagger:
+  # 是否开启swagger
+  enabled: true
+  # 请求前缀
+  pathMapping: 
+  # token配置
+token:
+    # 令牌自定义标识
+    header: Authorization
+    # 令牌密钥
+    secret: 
+    # 令牌有效期（默认30分钟）
+    expireTime: 30
+# 设置dubbo的参数
+dubbo:
+  application:
+# 当前消费者的配置名
+    name: dubbo-provider-assi
+    qos-enable: false
+  registry:
+    address: 
+    check: false
+  consumer:
+    check: false
+# 协议（缺省值）
+  protocol:
+    name: dubbo
+    port: -1
+    serialization: kryo
+    payload: 104857600 #100M
+
+es_prop:
+  # 启动日志收集器
+  enable: false
+  
+esIndex:
+  oplog: 
+
+hamigua:
+  login:
+    exclude: /**/sso/login;/**/download/**;/**/downloadPersonTemplate;/**/upload;/**/assets/**;/**/favicon.ico;/**/index.html;/**/config/**;/api/video/chat/**;/api/applet/**;/**/front/**;/**/h5/**
+
+
