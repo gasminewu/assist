@@ -1,5 +1,5 @@
-#业务辅助配置
-ywpzsysparams:
+#辅助配置
+sysparams:
 #云踏勘登录首页
-  yunkantanurl: http://192.168.1.239:8080/ics/frame/nfm/download/
+  yunkantanurl: 
 

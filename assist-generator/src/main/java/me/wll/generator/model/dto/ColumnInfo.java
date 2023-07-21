@@ -17,17 +17,18 @@ public class ColumnInfo {
     private String columnType;
 
     @ApiModelProperty(value = "数据库字段键类型")
-    private String keyType;
-
-    @ApiModelProperty(value = "字段额外的参数")
-    private String extra;
-
+    private String columnKey;
+  
     @ApiModelProperty(value = "数据库字段描述")
     private String remark;
+    @ApiModelProperty(value = "数据库字段描述")
+    private Integer size=0;
 
     @ApiModelProperty(value = "是否必填")
     private Boolean notNull;
-
+    
+    @ApiModelProperty(value = "主键是否自增")
+    private String auto;
 
     @ApiModelProperty(value = "查询 1:模糊 2：精确")
     private String queryType;

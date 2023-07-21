@@ -59,13 +59,13 @@ public class GenUtil {
     private static List<String> getAdminTemplateNames() {
         List<String> templateNames = new ArrayList<>();
         templateNames.add("Entity");
-//        templateNames.add("Dto");
-//        templateNames.add("Mapper");
-//        templateNames.add("Controller");
-//        templateNames.add("QueryCriteria");
-//        templateNames.add("Service");
-//        templateNames.add("ServiceImpl");
-//        templateNames.add("Repository");
+        templateNames.add("Dto");
+        templateNames.add("Mapper");
+        templateNames.add("Controller");
+        templateNames.add("QueryCriteria");
+        templateNames.add("Service");
+        templateNames.add("ServiceImpl");
+        templateNames.add("Repository");
         return templateNames;
     }
     /**
@@ -135,6 +135,8 @@ public class GenUtil {
         genMap.put("className", className);
         // 保存小写开头的类名
         genMap.put("changeClassName", changeClassName);
+        
+        
         // 存在 Timestamp 字段
         genMap.put("hasTimestamp", false);
         // 查询类中存在 Timestamp 字段
@@ -167,20 +169,22 @@ public class GenUtil {
             // 字段描述
             listMap.put("remark", column.getRemark());
             // 字段类型
-            listMap.put("columnKey", column.getKeyType());
+            listMap.put("columnKey", column.getColumnKey());
             // 主键类型
             String colType = ColUtil.cloToJava(column.getColumnType());
             // 小写开头的字段名
             String changeColumnName = StringUtils.toCamelCase(column.getColumnName());
             // 大写开头的字段名
             String capitalColumnName = StringUtils.toCapitalizeCamelCase(column.getColumnName());
-            if (PK.equals(column.getKeyType())) {
+            if (PK.equals(column.getColumnKey())) {
                 // 存储主键类型
                 genMap.put("pkColumnType", colType);
                 // 存储小写开头的字段名
                 genMap.put("pkChangeColName", changeColumnName);
                 // 存储大写开头的字段名
                 genMap.put("pkCapitalColName", capitalColumnName);
+                
+                genMap.put("hasPk", true);
             }
             // 是否存在 Timestamp 类型的字段
             if (TIMESTAMP.equals(colType)) {
@@ -191,7 +195,7 @@ public class GenUtil {
                 genMap.put("hasBigDecimal", true);
             }
             // 主键是否自增
-            if (EXTRA.equals(column.getExtra())) {
+            if (EXTRA.equals(column.getAuto())) {
                 genMap.put("auto", true);
             }
             // 主键存在字典
@@ -201,6 +205,8 @@ public class GenUtil {
                     dicts.add(column.getDictName());
             }
 
+            // 存储字段长度
+            listMap.put("size", String.valueOf(column.getSize()));
             // 存储字段类型
             listMap.put("columnType", colType);
             // 存储字原始段名称

@@ -59,71 +59,18 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-      naming:
-        physical-strategy: com.wisoft.hamigua.common.jpa.UpperCaseSpringPhysicalNamingStrategy
+     # naming:
+     #   physical-strategy: com.wisoft.hamigua.common.jpa.UpperCaseSpringPhysicalNamingStrategy
     properties:
       hibernate:
         auto_quote_keyword: globally_quoted_identifiers
 #      naming:
 #        physical-strategy:  org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-  redis:
-    host: 192.10.110.59
-    port: 6379
-    database: 13
-    lettuce:
-      pool:
-        max-idle: 5
-        max-active: 10
-        max-wait: 2000
-        min-idle: 1
-logging: 
-  file: 
-    path: ./logs/assi
-  level:
-    root: INFO
-#    屏蔽转word warn级别日志
-    org.apache.poi.util.XMLHelper: error
+
 # Swagger配置
 swagger:
   # 是否开启swagger
   enabled: true
   # 请求前缀
   pathMapping: 
-  # token配置
-token:
-    # 令牌自定义标识
-    header: Authorization
-    # 令牌密钥
-    secret: 
-    # 令牌有效期（默认30分钟）
-    expireTime: 30
-# 设置dubbo的参数
-dubbo:
-  application:
-# 当前消费者的配置名
-    name: dubbo-provider-assi
-    qos-enable: false
-  registry:
-    address: 
-    check: false
-  consumer:
-    check: false
-# 协议（缺省值）
-  protocol:
-    name: dubbo
-    port: -1
-    serialization: kryo
-    payload: 104857600 #100M
-
-es_prop:
-  # 启动日志收集器
-  enable: false
-  
-esIndex:
-  oplog: 
-
-hamigua:
-  login:
-    exclude: /**/sso/login;/**/download/**;/**/downloadPersonTemplate;/**/upload;/**/assets/**;/**/favicon.ico;/**/index.html;/**/config/**;/api/video/chat/**;/api/applet/**;/**/front/**;/**/h5/**
-
 
