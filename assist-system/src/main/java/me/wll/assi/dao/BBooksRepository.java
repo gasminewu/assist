@@ -13,6 +13,4 @@ import me.wll.assi.model.entity.BBooks;
 * @date 2023-07-19
 **/
 public interface BBooksRepository extends JpaRepository<BBooks, String>, JpaSpecificationExecutor<BBooks> {
-	@Query(value = "")
-	Integer findMaxSn();
 }

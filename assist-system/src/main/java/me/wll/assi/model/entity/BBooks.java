@@ -28,7 +28,7 @@ public class BBooks extends IdEntity {
     private static final long serialVersionUID = -7353513661319929347L;
 
 	@Size(max = 100, message = "书籍名称最大长度100")
-    @ApiModelProperty(value = "书籍名称")
+    @ApiModelProperty(value = "书籍名称， 和作者一起不能重复")
     private String title;
 
     @NotBlank
@@ -37,7 +37,7 @@ public class BBooks extends IdEntity {
     private String autor;
     
     @NotNull
-    @ApiModelProperty(value = "顺序号")
+    @ApiModelProperty(value = "顺序号",notes = " 默认+1，如果输入1，大于1的都+1")
     private Integer sn;
     
     @NotBlank
@@ -59,7 +59,7 @@ public class BBooks extends IdEntity {
     private String nation;
     
     @Size(max = 10, message = "")
-    @ApiModelProperty(value = "分类")
+    @ApiModelProperty(value = "分类",notes = "百科全书01，机械/车/飞机02，经典绘本03，传统04，益智逻辑思维05，英语06，数学07，生物08，艺术09 ")
     private String classi;
     
     @Size(max = 1, message = "")
@@ -79,7 +79,7 @@ public class BBooks extends IdEntity {
     private String buy;
     
     @Size(max = 1000, message = "")
-    @ApiModelProperty(value = "备注")
+    @ApiModelProperty(value = "备注",notes = "包括简介，总结等")
     private String remark;
     
 
