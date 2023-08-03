@@ -1,8 +1,8 @@
 package me.wll.assi.service;
 
-import me.wll.assi.model.dto.BBooksQuery;
-import me.wll.assi.model.entity.BBooks;
-import me.wll.assi.model.vo.BBooksVo;
+import me.wll.assi.model.dto.BbooksQuery;
+import me.wll.assi.model.entity.Bbooks;
+import me.wll.assi.model.vo.BbooksVo;
 import me.wll.common.bean.PageBean;
 
 /**
@@ -11,7 +11,7 @@ import me.wll.common.bean.PageBean;
 * @author wll
 * @date 2023-07-19
 **/
-public interface BBooksService {
+public interface BbooksService {
 
 	/**
 	 * 查询数据分页
@@ -22,7 +22,7 @@ public interface BBooksService {
 	 * @变更记录 2023年7月20日 上午9:33:18 武林林 创建
 	 *
 	 */
-	PageBean<BBooksVo> listBBooks(BBooksQuery query);
+	PageBean<BbooksVo> findBbooks(BbooksQuery query);
   
 	/**
      * 根据ID查询
@@ -33,7 +33,7 @@ public interface BBooksService {
      * @变更记录 2023年7月20日 上午9:33:01 武林林 创建
      *
      */
-    BBooksVo findBBooksById(String id);
+    BbooksVo findBbooksById(String id);
 
     /**
      * 创建或者编辑书籍
@@ -43,7 +43,7 @@ public interface BBooksService {
      * @变更记录 2023年7月20日 上午9:32:36 武林林 创建
      *
      */
-    void createOrUpdateBBooks(BBooks resources);
+    void createOrUpdateBbooks(Bbooks resources);
 
     /**
      * 多选删除

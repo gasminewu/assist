@@ -9,6 +9,13 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
+/**
+ * 启动类
+ *
+ * @since  2023年8月3日
+ * @author 武林林
+ *
+ */
 @SpringBootApplication
 @EnableTransactionManagement
 @EnableJpaAuditing

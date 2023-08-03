@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
+import lombok.Data;
+
 public class PageInfo {
 	private int curpage;
 	private int percount;

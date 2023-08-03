@@ -9,7 +9,7 @@ import java.io.Serializable;
 * @date 2023-07-19
 **/
 @Data
-public class BBooksVo implements Serializable {
+public class BbooksVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

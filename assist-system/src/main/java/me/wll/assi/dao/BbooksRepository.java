@@ -2,9 +2,8 @@ package me.wll.assi.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Query;
 
-import me.wll.assi.model.entity.BBooks;
+import me.wll.assi.model.entity.Bbooks;
 
 /**
 * 书籍
@@ -12,5 +11,5 @@ import me.wll.assi.model.entity.BBooks;
 * @author wll
 * @date 2023-07-19
 **/
-public interface BBooksRepository extends JpaRepository<BBooks, String>, JpaSpecificationExecutor<BBooks> {
+public interface BbooksRepository extends JpaRepository<Bbooks, String>, JpaSpecificationExecutor<Bbooks> {
 }

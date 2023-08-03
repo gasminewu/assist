@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import me.wll.assi.model.dto.BBooksQuery;
-import me.wll.assi.model.entity.BBooks;
-import me.wll.assi.model.vo.BBooksVo;
-import me.wll.assi.service.BBooksService;
+import me.wll.assi.model.dto.BbooksQuery;
+import me.wll.assi.model.entity.Bbooks;
+import me.wll.assi.model.vo.BbooksVo;
+import me.wll.assi.service.BbooksService;
 import me.wll.common.bean.PageBean;
 import me.wll.common.bean.ResultBean;
 
@@ -22,10 +22,10 @@ import me.wll.common.bean.ResultBean;
 @Api(tags = "书籍管理")
 @RestController
 @RequestMapping("/bBooks")
-public class BBooksController {
+public class BbooksController {
 
 	@Autowired
-    private BBooksService bBooksService;
+    private BbooksService bBooksService;
 
 	/**
 	 * @param criteria 查询参数
@@ -35,10 +35,10 @@ public class BBooksController {
 	 * @变更记录 2023年7月19日 wll 创建
 	 *
 	 */
-	@PostMapping(value = "/listBBooks")
+	@PostMapping(value = "/findBbooks")
     @ApiOperation("查询书籍，分页")
-    public ResultBean<PageBean<BBooksVo>> listBBooks(@RequestBody BBooksQuery criteria){
-        return new ResultBean<>(this.bBooksService.listBBooks(criteria));
+    public ResultBean<PageBean<BbooksVo>> findBbooks(@RequestBody BbooksQuery criteria){
+        return new ResultBean<>(this.bBooksService.findBbooks(criteria));
     }
 	/**
 	 * @param resources 保存对象
@@ -47,10 +47,10 @@ public class BBooksController {
 	 * @变更记录 2023年7月19日 wll 创建
 	 *
 	 */
-    @PostMapping(value = "/findById")
+    @PostMapping(value = "/findBbooksById")
     @ApiOperation("根据主键查询")
-    public ResultBean<BBooksVo> findBBooksById(String id){
-        return new ResultBean<>(bBooksService.findBBooksById(id));
+    public ResultBean<BbooksVo> findBbooksById(String id){
+        return new ResultBean<>(bBooksService.findBbooksById(id));
     }
 	/**
 	 * @param resources 保存对象
@@ -59,10 +59,10 @@ public class BBooksController {
 	 * @变更记录 2023年7月19日 wll 创建
 	 *
 	 */
-    @PostMapping(value = "/createOrUpdateBBooks")
+    @PostMapping(value = "/createOrUpdateBbooks")
     @ApiOperation("新增或者编辑书籍")
-    public ResultBean<?> createOrUpdateBBooks(@RequestBody BBooks resources){
-        bBooksService.createOrUpdateBBooks(resources);
+    public ResultBean<?> createOrUpdateBbooks(@RequestBody Bbooks resources){
+        bBooksService.createOrUpdateBbooks(resources);
         return new ResultBean<>();
     }
     /**
@@ -72,9 +72,9 @@ public class BBooksController {
 	 * @变更记录 2023年7月19日 wll 创建
 	 *
 	 */
-    @PostMapping(value = "/deleteBBooks")
+    @PostMapping(value = "/deleteBbooks")
     @ApiOperation("删除书籍")
-    public ResultBean<?> deleteBBooks(@RequestBody String[] ids) {
+    public ResultBean<?> deleteBbooks(@RequestBody String[] ids) {
         bBooksService.deleteAll(ids);
         return new ResultBean<>();
     }

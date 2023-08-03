@@ -23,7 +23,7 @@ import me.wll.common.model.entity.IdEntity;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name="b_books")
-public class BBooks extends IdEntity {
+public class Bbooks extends IdEntity {
     
     private static final long serialVersionUID = -7353513661319929347L;
 
@@ -83,7 +83,7 @@ public class BBooks extends IdEntity {
     private String remark;
     
 
-    public void copy(BBooks source){
+    public void copy(Bbooks source){
         BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

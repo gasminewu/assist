@@ -2,12 +2,9 @@ package me.wll.assi.service.impl;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,12 +15,12 @@ import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
-import me.wll.assi.dao.BBooksRepository;
-import me.wll.assi.model.dto.BBooksQuery;
-import me.wll.assi.model.entity.BBooks;
+import me.wll.assi.dao.BbooksRepository;
+import me.wll.assi.model.dto.BbooksQuery;
+import me.wll.assi.model.entity.Bbooks;
 import me.wll.assi.model.entity.QBBooks;
-import me.wll.assi.model.vo.BBooksVo;
-import me.wll.assi.service.BBooksService;
+import me.wll.assi.model.vo.BbooksVo;
+import me.wll.assi.service.BbooksService;
 import me.wll.common.bean.PageBean;
 import me.wll.common.utils.DateUtil;
 import me.wll.common.utils.StringUtils;
@@ -35,48 +32,45 @@ import me.wll.common.utils.ValidationUtil;
 * @date 2023-07-19
 **/
 @Service
-public class BBooksServiceImpl implements BBooksService {
-	Logger logger = LoggerFactory.getLogger(BBooksServiceImpl.class);
+@Transactional(rollbackFor = Exception.class)
+public class BbooksServiceImpl implements BbooksService {
+	Logger logger = LoggerFactory.getLogger(BbooksServiceImpl.class);
 	
 	@Autowired
 	private JPAQueryFactory queryFactory;
 	@Autowired
-    private  BBooksRepository bBooksRepository;
+    private  BbooksRepository bBooksRepository;
 	
-	private QBBooks qBBooks=QBBooks.bBooks;
+	private QBBooks bBooks=QBBooks.bBooks;
 	
     @Override
-    public PageBean<BBooksVo> listBBooks(BBooksQuery query){
+    public PageBean<BbooksVo> findBbooks(BbooksQuery query){
     	//查询条件动态拼接
 		BooleanBuilder builder = new BooleanBuilder();
 		
 		if (StringUtils.isNotBlank(query.getKeyword())) {
-			builder.and(qBBooks.title.like("%" + query.getKeyword()+ "%"));
+			builder.and(bBooks.title.like("%" + query.getKeyword()+ "%"));
 		}
 		// 分页对象
 		Pageable pageable = PageRequest.of(query.getCurpage() - 1, query.getPercount());
 		// 查询
-		JPAQuery<BBooks> jq  = this.queryFactory.selectFrom(qBBooks).where(builder).
-				orderBy(qBBooks.newtime.desc()).offset(pageable.getOffset()).limit(pageable.getPageSize());
-		QueryResults<BBooks> tuples = jq.fetchResults();
-		List<BBooks> list=jq.fetchResults().getResults();
+		JPAQuery<Bbooks> jq  = this.queryFactory.selectFrom(bBooks).where(builder).
+				orderBy(bBooks.newtime.desc()).offset(pageable.getOffset()).limit(pageable.getPageSize());
+		QueryResults<Bbooks> tuples = jq.fetchResults();
+		List<Bbooks> list=jq.fetchResults().getResults();
 		
-//		return new PageBean<>(bBooksMapper.toDto(list), pageable, tuples.getTotal());
 		return null;
     }
 
     @Override
-    @Transactional
-    public BBooksVo findBBooksById(String id) {
-        BBooks bBooks = bBooksRepository.findById(id).orElseGet(BBooks::new);
+    public BbooksVo findBbooksById(String id) {
+        Bbooks bBooks = bBooksRepository.findById(id).orElseGet(Bbooks::new);
         ValidationUtil.isNull(bBooks.getId(),"BBooks","id",id);
-//        return bBooksMapper.toDto(bBooks);
     	return null;
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public void createOrUpdateBBooks(BBooks resources) {
+    public void createOrUpdateBbooks(Bbooks resources) {
     	//如果是新增
     	if(StringUtils.isBlank(resources.getId())) {
     		resources.setNewtime(DateUtil.getYMD());

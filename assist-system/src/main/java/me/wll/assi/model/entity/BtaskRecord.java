@@ -19,7 +19,7 @@ import me.wll.common.model.entity.IdEntity;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name="b_task_record")
-public class BTaskRecord extends IdEntity {
+public class BtaskRecord extends IdEntity {
     
     private static final long serialVersionUID = -7353513661319929347L;
 
